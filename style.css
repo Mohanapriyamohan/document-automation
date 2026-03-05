@@ -3136,25 +3136,8 @@ a:hover {
   gap: 12px;
 }
 
-/* Section wrapper (bounding box) */
-.layout-section-wrapper {
-  position: relative;
-  border: 2px dashed transparent;
-  border-radius: var(--radius-md);
-  transition: all 150ms ease;
-  margin-bottom: 12px;
-}
-
-.layout-section-wrapper:hover {
-  border-color: rgba(99, 102, 241, 0.35);
-  background: rgba(99, 102, 241, 0.02);
-}
-
-.layout-section-wrapper.selected {
-  border-color: var(--primary);
-  background: rgba(99, 102, 241, 0.04);
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.12);
-}
+/* Section wrapper (bounding box) – base rules now defined at end of file */
+/* Keep only supplemental/dragging states here */
 
 .layout-section-wrapper.dragging {
   opacity: 0.5;
@@ -3163,36 +3146,10 @@ a:hover {
   transform: scale(0.98);
 }
 
-/* Section controls toolbar (shown on hover) */
+/* Section controls toolbar (legacy – replaced by always-visible .layout-section-toolbar) */
 .layout-section-controls {
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  right: -1px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 8px;
-  background: var(--primary);
-  color: #fff;
-  border-radius: var(--radius-md) var(--radius-md) 0 0;
-  font-size: var(--fs-xs);
-  font-weight: 500;
-  opacity: 0;
-  transform: translateY(-100%);
-  transition: all 150ms ease;
-  z-index: 10;
-}
-
-.layout-section-wrapper:hover .layout-section-controls,
-.layout-section-wrapper.selected .layout-section-controls {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.layout-section-wrapper:hover,
-.layout-section-wrapper.selected {
-  padding-top: 28px;
+  display: none;
+  /* hidden – replaced by new toolbar */
 }
 
 .layout-drag-handle {
@@ -3299,18 +3256,14 @@ a:hover {
   text-decoration: line-through;
 }
 
-/* Drop zone */
+/* Drop zone – now subtle; visible indicators defined at end of file */
 .layout-drop-zone {
-  padding: 16px;
-  border: 2px dashed var(--accent);
+  padding: 3px;
+  border: 2px dashed transparent;
   border-radius: var(--radius-md);
   text-align: center;
-  color: var(--accent);
-  font-size: var(--fs-sm);
-  font-weight: 500;
-  background: rgba(34, 211, 238, 0.04);
-  margin-bottom: 12px;
-  animation: pulseGlow 2s infinite;
+  margin-bottom: 4px;
+  transition: all 200ms ease;
 }
 
 /* Add Section button */
@@ -3377,6 +3330,7 @@ a:hover {
   font-size: var(--fs-sm);
   color: var(--text-secondary);
 }
+
 /* ═══════════════════════════════════════════════════════
    INTERACTIVE CANVAS EXTENSIONS
    ═══════════════════════════════════════════════════════ */
@@ -3406,9 +3360,11 @@ a:hover {
   gap: 8px;
   align-items: start;
 }
+
 .edit-layout-canvas.two-col .layout-drop-zone {
   grid-column: 1 / -1;
 }
+
 .edit-layout-canvas.two-col .add-section-btn {
   grid-column: 1 / -1;
 }
@@ -3417,6 +3373,7 @@ a:hover {
 .section-inspector .inspector-section {
   margin-bottom: 16px;
 }
+
 .section-inspector .inspector-section-title {
   font-size: 11px;
   font-weight: 600;
@@ -3552,7 +3509,7 @@ a:hover {
   top: calc(100% + 8px);
   right: 0;
   width: 260px;
-  background: rgb(28,34,51);
+  background: rgb(28, 34, 51);
   backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -3669,4 +3626,325 @@ a:hover {
 
 .profile-dd-item.role-row {
   justify-content: space-between;
+}
+
+/* ═══════════════════════════════════════════════════════
+   REQUEST VALUE BUTTON – visible labeled button
+   ═══════════════════════════════════════════════════════ */
+
+.btn-request-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font);
+  color: var(--primary-light, #818CF8);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.10) 0%, rgba(34, 211, 238, 0.08) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.30);
+  border-radius: var(--radius, 6px);
+  cursor: pointer;
+  transition: all 200ms ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.2px;
+}
+
+.btn-request-value:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.20) 0%, rgba(34, 211, 238, 0.15) 100%);
+  border-color: var(--primary, #6366F1);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-request-value:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn-request-value:disabled,
+.btn-request-value.disabled-action {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Inside the edit-fields canvas missing areas */
+.ef-canvas .ef-missing .btn-request-value {
+  margin-left: 10px;
+}
+
+/* Inside the right field-editor panel */
+.field-editor-row .btn-request-value {
+  margin-left: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   EDIT LAYOUT – IMPROVED TOOLBAR
+   ═══════════════════════════════════════════════════════ */
+
+.edit-layout-container {
+  display: flex;
+  min-height: 600px;
+  height: 100%;
+}
+
+.edit-layout-canvas-area {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Layout Toolbar – top bar */
+.layout-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.06) 0%, rgba(34, 211, 238, 0.04) 100%);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.15);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.layout-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.layout-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.layout-toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.layout-ratio-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  padding-left: 8px;
+  border-left: 1px solid var(--border);
+}
+
+/* Toolbar buttons */
+.layout-tb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 6px);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font);
+  color: var(--text-secondary);
+  background: var(--bg-card, rgba(255, 255, 255, 0.06));
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.layout-tb-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary-light);
+}
+
+.layout-tb-btn.active {
+  background: var(--primary, #6366F1);
+  color: #fff;
+  border-color: var(--primary, #6366F1);
+}
+
+.layout-tb-icon {
+  font-size: 11px;
+}
+
+/* Ratio preset buttons */
+.layout-ratio-btn {
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm, 4px);
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font);
+  color: var(--text-muted);
+  background: transparent;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.layout-ratio-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary-light);
+}
+
+.layout-ratio-btn.active {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: var(--primary);
+  color: var(--primary-light);
+}
+
+/* ═══════════════════════════════════════════════════════
+   EDIT LAYOUT – IMPROVED SECTION BOXES
+   ═══════════════════════════════════════════════════════ */
+
+/* Override the section wrapper for clearer dashed borders */
+.layout-section-wrapper {
+  position: relative;
+  border: 2px dashed rgba(99, 102, 241, 0.25);
+  border-radius: var(--radius-md, 10px);
+  transition: all 200ms ease;
+  margin-bottom: 14px;
+  background: var(--bg-card, rgba(255, 255, 255, 0.04));
+}
+
+.layout-section-wrapper:hover {
+  border-color: rgba(99, 102, 241, 0.50);
+  background: rgba(99, 102, 241, 0.03);
+  box-shadow: 0 2px 12px rgba(99, 102, 241, 0.08);
+}
+
+.layout-section-wrapper.selected {
+  border-color: var(--primary, #6366F1);
+  border-style: solid;
+  background: rgba(99, 102, 241, 0.05);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12), 0 4px 16px rgba(99, 102, 241, 0.10);
+}
+
+.layout-section-wrapper.mandatory-section {
+  border-color: rgba(34, 211, 238, 0.30);
+}
+
+.layout-section-wrapper.mandatory-section:hover {
+  border-color: rgba(34, 211, 238, 0.55);
+}
+
+/* Section Toolbar – always visible header bar */
+.layout-section-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.08) 0%, transparent 100%);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.10);
+  border-radius: var(--radius-md, 10px) var(--radius-md, 10px) 0 0;
+  min-height: 38px;
+  gap: 8px;
+}
+
+.layout-section-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.layout-section-label {
+  flex: 0 1 auto;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary, #F1F5F9);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Mandatory badge */
+.layout-mandatory-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent, #22D3EE);
+  background: rgba(34, 211, 238, 0.10);
+  padding: 2px 8px;
+  border-radius: var(--radius-full, 999px);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Section action buttons */
+.layout-section-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.layout-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm, 4px);
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font);
+  color: var(--text-muted, #94A3B8);
+  background: transparent;
+  cursor: pointer;
+  transition: all 150ms ease;
+  white-space: nowrap;
+}
+
+.layout-action-btn:hover {
+  background: rgba(99, 102, 241, 0.10);
+  color: var(--primary-light, #818CF8);
+  border-color: rgba(99, 102, 241, 0.20);
+}
+
+.layout-action-btn .action-icon {
+  font-size: 12px;
+}
+
+.layout-action-btn.danger-action:hover {
+  background: rgba(239, 68, 68, 0.10);
+  color: #EF4444;
+  border-color: rgba(239, 68, 68, 0.20);
+}
+
+.layout-action-btn.disabled-action {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Section content area */
+.layout-section-content {
+  padding: 14px 18px;
+}
+
+/* Drop zones between sections */
+.layout-drop-zone {
+  padding: 3px;
+  border: 2px dashed transparent;
+  border-radius: var(--radius-md, 10px);
+  margin-bottom: 4px;
+  transition: all 200ms ease;
+}
+
+.layout-drop-zone.drag-over {
+  padding: 16px;
+  border-color: var(--accent, #22D3EE);
+  background: rgba(34, 211, 238, 0.06);
+}
+
+/* Hover styling override — don't add top padding */
+.layout-section-wrapper:hover,
+.layout-section-wrapper.selected {
+  padding-top: 0;
 }

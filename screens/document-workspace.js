@@ -1,6 +1,6 @@
 // ═══ Document Workspace Screen (full page) ═══
 export function renderDocumentWorkspace() {
-    return `
+  return `
     <div class="animate-up" style="display:flex;flex-direction:column;height:calc(100vh - var(--topbar-h) - 48px);">
       <!-- Header -->
       <div class="flex items-center justify-between mb-md">
@@ -62,27 +62,29 @@ export function renderDocumentWorkspace() {
               <div class="edit-layout-canvas-area">
                 <!-- Layout Toolbar -->
                 <div class="layout-toolbar">
-                  <div class="layout-toolbar-group">
-                    <span class="layout-toolbar-label">Layout:</span>
-                    <button class="layout-tb-btn active" data-col-layout="1col">
-                      <span class="layout-tb-icon">▰</span> 1 Column
-                    </button>
-                    <button class="layout-tb-btn" data-col-layout="2col">
-                      <span class="layout-tb-icon">▰▰</span> 2 Columns
-                    </button>
-                  </div>
-                  <div class="layout-toolbar-group layout-2col-options" id="layout2colOptions" style="display:none;">
-                    <button class="layout-tb-btn" data-col-layout="swap">⇄ Swap Columns</button>
-                    <div class="layout-ratio-group">
-                      <span class="layout-toolbar-label">Ratio:</span>
-                      <button class="layout-ratio-btn active" data-ratio="50-50">50/50</button>
-                      <button class="layout-ratio-btn" data-ratio="60-40">60/40</button>
-                      <button class="layout-ratio-btn" data-ratio="40-60">40/60</button>
+                  <div class="layout-toolbar-left">
+                    <div class="layout-toolbar-group">
+                      <span class="layout-toolbar-label">Layout:</span>
+                      <button class="layout-tb-btn active" data-col-layout="1col">
+                        <span class="layout-tb-icon">▰</span> 1 Column
+                      </button>
+                      <button class="layout-tb-btn" data-col-layout="2col">
+                        <span class="layout-tb-icon">▰▰</span> 2 Columns
+                      </button>
+                    </div>
+                    <div class="layout-toolbar-group layout-2col-options" id="layout2colOptions" style="display:none;">
+                      <button class="layout-tb-btn" data-col-layout="swap">⇄ Swap Columns</button>
+                      <div class="layout-ratio-group">
+                        <span class="layout-toolbar-label">Ratio:</span>
+                        <button class="layout-ratio-btn active" data-ratio="50-50">50/50</button>
+                        <button class="layout-ratio-btn" data-ratio="60-40">60/40</button>
+                        <button class="layout-ratio-btn" data-ratio="40-60">40/60</button>
+                      </div>
                     </div>
                   </div>
-                  <div class="layout-toolbar-group ml-auto">
-                    <button class="btn btn-ghost btn-sm" data-action="reset-layout">↺ Reset to Template</button>
-                    <button class="btn btn-accent btn-sm" data-action="save-template-variant">📄 Save as Template</button>
+                  <div class="layout-toolbar-right">
+                    <button class="btn btn-ghost btn-sm" data-action="reset-layout">↺ Reset</button>
+                    <button class="btn btn-accent btn-sm" data-action="save-template-variant">📄 Save Template</button>
                     <button class="btn btn-primary btn-sm" data-action="save-layout-override">💾 Save Override</button>
                   </div>
                 </div>
@@ -111,7 +113,7 @@ export function renderDocumentWorkspace() {
 
 // ═══ PREVIEW MODE CANVAS – read-only with Request buttons on missing fields ═══
 function renderPreviewCanvas() {
-    return `
+  return `
     <div class="doc-canvas preview-canvas">
       <div class="doc-header-block">
         <div class="co-name">Company Name Placeholder</div>
@@ -191,7 +193,7 @@ function renderPreviewCanvas() {
 
 // ═══ EDIT FIELDS MODE CANVAS ═══
 function renderEditFieldsCanvas() {
-    return `
+  return `
     <div class="doc-canvas edit-fields-canvas ef-canvas">
       <div class="doc-header-block">
         <div class="co-name">
@@ -235,6 +237,7 @@ function renderEditFieldsCanvas() {
             <span class="doc-field-label">Contact</span>
             <span class="doc-field-value field-missing-optional ef-missing" data-field-name="Contact Person" data-missing-type="optional">
               <span class="field-missing-label">⚠ Optional – Contact Person</span>
+              <button class="btn btn-request-value btn-sm" data-request-field="Contact Person" title="Request from Department">📨 Request Value</button>
             </span>
           </div>
         </div>
@@ -264,12 +267,14 @@ function renderEditFieldsCanvas() {
             <span class="doc-field-label">Vessel Name</span>
             <span class="doc-field-value field-missing-required ef-missing" data-field-name="Vessel Name" data-missing-type="required">
               <span class="field-missing-label">⛔ Required – Vessel Name</span>
+              <button class="btn btn-request-value btn-sm" data-request-field="Vessel Name" title="Request from Department">📨 Request Value</button>
             </span>
           </div>
           <div class="doc-field-row">
             <span class="doc-field-label">ETD</span>
             <span class="doc-field-value field-missing-required ef-missing" data-field-name="Estimated Departure" data-missing-type="required">
               <span class="field-missing-label">⛔ Required – Estimated Departure</span>
+              <button class="btn btn-request-value btn-sm" data-request-field="Estimated Departure" title="Request from Department">📨 Request Value</button>
             </span>
           </div>
         </div>
@@ -320,6 +325,7 @@ function renderEditFieldsCanvas() {
           <span class="doc-field-label">Freight</span>
           <span class="doc-field-value field-missing-required ef-missing" data-field-name="Freight Amount" data-missing-type="required">
             <span class="field-missing-label">⛔ Required – Freight Amount</span>
+            <button class="btn btn-request-value btn-sm" data-request-field="Freight Amount" title="Request from Department">📨 Request Value</button>
           </span>
         </div>
         <div class="doc-field-row" style="font-weight:700;font-size:14px;border-bottom:2px solid #334155;">
@@ -344,7 +350,7 @@ function renderEditFieldsCanvas() {
 
 // ═══ FIELD EDITOR PANEL ═══
 function renderFieldEditorPanel() {
-    return `
+  return `
     <div class="inspector-panel" style="display:flex;flex-direction:column;height:100%;">
       <div class="inspector-header" style="padding:16px;border-bottom:1px solid var(--border);background:white;">
         <h3 style="font-size:var(--fs-md);font-weight:600;margin:0;">Field Editor</h3>
@@ -408,7 +414,7 @@ function renderFieldEditorPanel() {
             </div>
             <div class="flex items-center gap-xs">
               <input type="text" class="form-input form-input-sm" placeholder="Enter Contact Person" data-sync-field="consignee_contact" />
-              <button class="btn btn-ghost btn-sm" title="Request from Department" data-request-field="Contact Person" style="padding:0 8px;">📨</button>
+              <button class="btn btn-request-value btn-sm" data-request-field="Contact Person" title="Request from Department">📨 Request Value</button>
             </div>
           </div>
         </div>
@@ -456,7 +462,7 @@ function renderFieldEditorPanel() {
             </div>
             <div class="flex items-center gap-xs">
               <input type="text" class="form-input form-input-sm" placeholder="Required" data-sync-field="vessel_name" style="border-color:var(--danger);" />
-              <button class="btn btn-ghost btn-sm" title="Request from Department" data-request-field="Vessel Name" style="padding:0 8px;">📨</button>
+              <button class="btn btn-request-value btn-sm" data-request-field="Vessel Name" title="Request from Department">📨 Request Value</button>
             </div>
           </div>
           
@@ -467,7 +473,7 @@ function renderFieldEditorPanel() {
             </div>
             <div class="flex items-center gap-xs">
               <input type="date" class="form-input form-input-sm" data-sync-field="etd" style="border-color:var(--danger);" />
-              <button class="btn btn-ghost btn-sm" title="Request from Department" data-request-field="Estimated Departure" style="padding:0 8px;">📨</button>
+              <button class="btn btn-request-value btn-sm" data-request-field="Estimated Departure" title="Request from Department">📨 Request Value</button>
             </div>
           </div>
         </div>
@@ -491,7 +497,7 @@ function renderFieldEditorPanel() {
             </div>
             <div class="flex items-center gap-xs">
               <input type="number" class="form-input form-input-sm" placeholder="Required" data-sync-field="freight" style="border-color:var(--danger);" />
-              <button class="btn btn-ghost btn-sm" title="Request from Department" data-request-field="Freight Amount" style="padding:0 8px;">📨</button>
+              <button class="btn btn-request-value btn-sm" data-request-field="Freight Amount" title="Request from Department">📨 Request Value</button>
             </div>
           </div>
         </div>
@@ -503,18 +509,18 @@ function renderFieldEditorPanel() {
 
 // ═══ EDIT LAYOUT MODE CANVAS ═══
 function renderEditLayoutCanvas() {
-    const sections = [
-        { id: 'header', name: 'Header', mandatory: false, type: 'header' },
-        { id: 'shipper', name: 'Shipper Details', mandatory: false, type: 'kv' },
-        { id: 'consignee', name: 'Consignee Details', mandatory: false, type: 'kv' },
-        { id: 'shipment-info', name: 'Shipment Information', mandatory: false, type: 'kv' },
-        { id: 'line-items', name: 'Line Items', mandatory: true, type: 'table' },
-        { id: 'totals', name: 'Totals', mandatory: true, type: 'kv' },
-        { id: 'declarations', name: 'Declarations & Certifications', mandatory: false, type: 'text' },
-        { id: 'signatures', name: 'Signatures', mandatory: false, type: 'text' },
-    ];
+  const sections = [
+    { id: 'header', name: 'Header', mandatory: false, type: 'header' },
+    { id: 'shipper', name: 'Shipper Details', mandatory: false, type: 'kv' },
+    { id: 'consignee', name: 'Consignee Details', mandatory: false, type: 'kv' },
+    { id: 'shipment-info', name: 'Shipment Information', mandatory: false, type: 'kv' },
+    { id: 'line-items', name: 'Line Items', mandatory: true, type: 'table' },
+    { id: 'totals', name: 'Totals', mandatory: true, type: 'kv' },
+    { id: 'declarations', name: 'Declarations & Certifications', mandatory: false, type: 'text' },
+    { id: 'signatures', name: 'Signatures', mandatory: false, type: 'text' },
+  ];
 
-    return `
+  return `
     <div class="doc-canvas edit-layout-canvas" id="editLayoutCanvas">
       ${sections.map((sec, i) => renderLayoutSection(sec, i)).join('')}
       <div class="layout-drop-zone" data-drop-index="${sections.length}"></div>
@@ -525,36 +531,36 @@ function renderEditLayoutCanvas() {
 }
 
 function renderLayoutSection(sec, index) {
-    const mandatoryAttr = sec.mandatory ? 'data-mandatory="true"' : '';
-    const mandatoryClass = sec.mandatory ? 'mandatory-section' : '';
+  const mandatoryAttr = sec.mandatory ? 'data-mandatory="true"' : '';
+  const mandatoryClass = sec.mandatory ? 'mandatory-section' : '';
 
-    let content = '';
-    switch (sec.id) {
-        case 'header':
-            content = `
+  let content = '';
+  switch (sec.id) {
+    case 'header':
+      content = `
         <div class="doc-header-block">
           <div class="co-name">Company Name Placeholder</div>
           <div class="doc-type">Commercial Invoice</div>
         </div>`;
-            break;
-        case 'shipper':
-            content = `
+      break;
+    case 'shipper':
+      content = `
         <div class="layout-kv-group">
           ${renderLayoutKVRow('Company Name', 'Placeholder Company Ltd.', 'shipper_company')}
           ${renderLayoutKVRow('Address', '123 Export Street, City', 'shipper_address')}
           ${renderLayoutKVRow('Tax ID', 'XX-XXXXXXXX', 'shipper_taxid')}
         </div>`;
-            break;
-        case 'consignee':
-            content = `
+      break;
+    case 'consignee':
+      content = `
         <div class="layout-kv-group">
           ${renderLayoutKVRow('Customer Name', 'Acme Industries GmbH', 'consignee_name')}
           ${renderLayoutKVRow('Address', 'Hamburg, Germany', 'consignee_address')}
           ${renderLayoutKVRow('Contact', '⚠ Optional – Contact Person', 'consignee_contact', true)}
         </div>`;
-            break;
-        case 'shipment-info':
-            content = `
+      break;
+    case 'shipment-info':
+      content = `
         <div class="layout-kv-group">
           ${renderLayoutKVRow('Shipment ID', 'SH-2024-0847', 'shipment_id')}
           ${renderLayoutKVRow('Incoterm', 'FOB', 'incoterm')}
@@ -563,9 +569,9 @@ function renderLayoutSection(sec, index) {
           ${renderLayoutKVRow('Vessel Name', '⛔ Required', 'vessel_name', true)}
           ${renderLayoutKVRow('ETD', '⛔ Required', 'etd', true)}
         </div>`;
-            break;
-        case 'line-items':
-            content = `
+      break;
+    case 'line-items':
+      content = `
         <table class="doc-table">
           <thead><tr><th>#</th><th>Description</th><th>HS Code</th><th>Qty</th><th>Unit Price</th><th>Total</th></tr></thead>
           <tbody>
@@ -574,38 +580,40 @@ function renderLayoutSection(sec, index) {
             <tr><td>3</td><td>Product C – Packaging Material</td><td>3923.10</td><td>200</td><td>$15.00</td><td>$3,000.00</td></tr>
           </tbody>
         </table>`;
-            break;
-        case 'totals':
-            content = `
+      break;
+    case 'totals':
+      content = `
         <div class="layout-kv-group">
           ${renderLayoutKVRow('Subtotal', '$25,200.00', 'subtotal')}
           ${renderLayoutKVRow('Freight', '⛔ Required', 'freight', true)}
           ${renderLayoutKVRow('Grand Total', 'Pending', 'grand_total')}
         </div>`;
-            break;
-        case 'declarations':
-            content = `<div class="layout-text-block">We hereby declare that the information contained herein is true and correct to the best of our knowledge.</div>`;
-            break;
-        case 'signatures':
-            content = `
+      break;
+    case 'declarations':
+      content = `<div class="layout-text-block">We hereby declare that the information contained herein is true and correct to the best of our knowledge.</div>`;
+      break;
+    case 'signatures':
+      content = `
         <div class="layout-signature-block">
           <div class="sig-line">Authorized Signatory</div>
           <div class="sig-line">Date: _______________</div>
         </div>`;
-            break;
-    }
+      break;
+  }
 
-    return `
+  return `
     <div class="layout-drop-zone" data-drop-index="${index}"></div>
     <div class="layout-section-wrapper ${mandatoryClass}" data-section-id="${sec.id}" data-section-index="${index}" ${mandatoryAttr} draggable="true">
       <div class="layout-section-toolbar">
-        <span class="layout-drag-handle" title="Drag to reorder">⠿</span>
-        <span class="layout-section-label">${sec.name}</span>
-        ${sec.mandatory ? '<span class="layout-mandatory-badge" title="Mandatory compliance section – cannot be removed">🔒 Required</span>' : ''}
+        <div class="layout-section-toolbar-left">
+          <span class="layout-drag-handle" title="Drag to reorder">⠿</span>
+          <span class="layout-section-label">${sec.name}</span>
+          ${sec.mandatory ? '<span class="layout-mandatory-badge" title="Mandatory compliance section – cannot be removed">🔒 Required</span>' : ''}
+        </div>
         <div class="layout-section-actions">
-          <button class="layout-action-btn" data-section-action="settings" data-section-target="${sec.id}" title="Section Settings">⚙</button>
-          <button class="layout-action-btn" data-section-action="duplicate" data-section-target="${sec.id}" title="Duplicate Section">📋</button>
-          <button class="layout-action-btn ${sec.mandatory ? 'disabled-action' : 'danger-action'}" data-section-action="remove" data-section-target="${sec.id}" ${sec.mandatory ? 'disabled title="Cannot remove mandatory compliance section"' : 'title="Remove Section"'}>🗑</button>
+          <button class="layout-action-btn" data-section-action="settings" data-section-target="${sec.id}" title="Section Settings"><span class="action-icon">⚙</span> Settings</button>
+          <button class="layout-action-btn" data-section-action="duplicate" data-section-target="${sec.id}" title="Duplicate Section"><span class="action-icon">📋</span> Duplicate</button>
+          <button class="layout-action-btn ${sec.mandatory ? 'disabled-action' : 'danger-action'}" data-section-action="remove" data-section-target="${sec.id}" ${sec.mandatory ? 'disabled title="Cannot remove mandatory compliance section"' : 'title="Remove Section"'}><span class="action-icon">🗑</span> Remove</button>
         </div>
       </div>
       <div class="layout-section-content">
@@ -615,7 +623,7 @@ function renderLayoutSection(sec, index) {
 }
 
 function renderLayoutKVRow(label, value, key, isMissing = false) {
-    return `
+  return `
     <div class="layout-kv-row" data-field-key="${key}">
       <div class="layout-kv-row-actions">
         <span class="kv-drag-handle" title="Reorder">⠿</span>
@@ -630,21 +638,21 @@ function renderLayoutKVRow(label, value, key, isMissing = false) {
 
 // ═══ INSPECTOR CONTENT GENERATOR ═══
 export function renderInspectorContent(sectionId) {
-    const sectionMeta = {
-        'header': { name: 'Header', mandatory: false, fields: ['Company Name', 'Document Type'] },
-        'shipper': { name: 'Shipper Details', mandatory: false, fields: ['Company Name', 'Address', 'Tax ID'] },
-        'consignee': { name: 'Consignee Details', mandatory: false, fields: ['Customer Name', 'Address', 'Contact'] },
-        'shipment-info': { name: 'Shipment Information', mandatory: false, fields: ['Shipment ID', 'Incoterm', 'Port of Loading', 'Port of Discharge', 'Vessel Name', 'ETD'] },
-        'line-items': { name: 'Line Items', mandatory: true, fields: [] },
-        'totals': { name: 'Totals', mandatory: true, fields: ['Subtotal', 'Freight', 'Grand Total'] },
-        'declarations': { name: 'Declarations & Certifications', mandatory: false, fields: [] },
-        'signatures': { name: 'Signatures', mandatory: false, fields: [] },
-    };
+  const sectionMeta = {
+    'header': { name: 'Header', mandatory: false, fields: ['Company Name', 'Document Type'] },
+    'shipper': { name: 'Shipper Details', mandatory: false, fields: ['Company Name', 'Address', 'Tax ID'] },
+    'consignee': { name: 'Consignee Details', mandatory: false, fields: ['Customer Name', 'Address', 'Contact'] },
+    'shipment-info': { name: 'Shipment Information', mandatory: false, fields: ['Shipment ID', 'Incoterm', 'Port of Loading', 'Port of Discharge', 'Vessel Name', 'ETD'] },
+    'line-items': { name: 'Line Items', mandatory: true, fields: [] },
+    'totals': { name: 'Totals', mandatory: true, fields: ['Subtotal', 'Freight', 'Grand Total'] },
+    'declarations': { name: 'Declarations & Certifications', mandatory: false, fields: [] },
+    'signatures': { name: 'Signatures', mandatory: false, fields: [] },
+  };
 
-    const meta = sectionMeta[sectionId];
-    if (!meta) return '<p class="text-muted">Select a section to configure.</p>';
+  const meta = sectionMeta[sectionId];
+  if (!meta) return '<p class="text-muted">Select a section to configure.</p>';
 
-    const fieldToggles = meta.fields.length > 0 ? `
+  const fieldToggles = meta.fields.length > 0 ? `
     <div class="inspector-section">
       <div class="inspector-section-title">Field Visibility</div>
       ${meta.fields.map(f => `
@@ -655,7 +663,7 @@ export function renderInspectorContent(sectionId) {
       `).join('')}
     </div>` : '';
 
-    return `
+  return `
     <div class="inspector-section">
       <div class="inspector-section-title">Section Name</div>
       <input class="form-input" value="${meta.name}" data-inspector-rename="${sectionId}" />
@@ -685,17 +693,17 @@ export function renderInspectorContent(sectionId) {
     ${fieldToggles}
     <div class="inspector-section" style="margin-top:12px;">
       ${meta.mandatory
-            ? '<button class="btn btn-ghost w-full" disabled title="Cannot remove mandatory compliance section">🔒 Mandatory Section</button>'
-            : `<button class="btn btn-danger w-full" data-inspector-remove="${sectionId}">🗑 Remove Section</button>`
-        }
+      ? '<button class="btn btn-ghost w-full" disabled title="Cannot remove mandatory compliance section">🔒 Mandatory Section</button>'
+      : `<button class="btn btn-danger w-full" data-inspector-remove="${sectionId}">🗑 Remove Section</button>`
+    }
     </div>`;
 }
 
 // ═══ MODALS ═══
 function renderRequestModal() {
-    return `
+  return `
     <div class="modal-overlay" id="requestModal" style="display:none;">
-      <div class="modal">
+      <div class="modal" style="width:480px;">
         <div class="modal-header">
           <div class="modal-title">📨 Request Field Value</div>
           <button class="modal-close" data-close-modal>✕</button>
@@ -703,29 +711,24 @@ function renderRequestModal() {
         <div class="modal-body">
           <div class="form-group">
             <label class="form-label">Field Name</label>
-            <input class="form-input" id="requestFieldName" value="Vessel Name" readonly style="opacity:0.7;" />
+            <input class="form-input" id="requestFieldName" value="" readonly style="background:var(--bg-secondary);opacity:0.85;font-weight:600;" />
           </div>
           <div class="form-group">
-            <label class="form-label">Assign to Department</label>
-            <select class="form-select">
-              <option>Sales</option>
-              <option>Supply Chain</option>
-              <option>Warehouse</option>
-              <option>Finance</option>
-              <option>Factory</option>
+            <label class="form-label">Department</label>
+            <select class="form-select" id="requestDepartment">
+              <option value="" disabled selected>Select Department…</option>
+              <option value="Sales">Sales</option>
+              <option value="Supply Chain">Supply Chain</option>
+              <option value="Warehouse">Warehouse</option>
+              <option value="Finance">Finance</option>
+              <option value="Factory">Factory</option>
+              <option value="Logistics">Logistics</option>
+              <option value="Quality">Quality</option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">Assignee (Optional)</label>
-            <input class="form-input" placeholder="e.g. John Doe" />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Due Date</label>
-            <input class="form-input" type="date" />
-          </div>
-          <div class="form-group">
             <label class="form-label">Comment / Reason</label>
-            <textarea class="form-textarea" placeholder="Add context or instructions..."></textarea>
+            <textarea class="form-textarea" id="requestComment" rows="3" placeholder="Explain why this value is needed or provide context…"></textarea>
           </div>
         </div>
         <div class="modal-footer">
@@ -737,7 +740,7 @@ function renderRequestModal() {
 }
 
 function renderRemoveConfirmModal() {
-    return `
+  return `
     <div class="modal-overlay" id="removeSectionModal" style="display:none;">
       <div class="modal" style="width:420px;">
         <div class="modal-header">
@@ -757,7 +760,7 @@ function renderRemoveConfirmModal() {
 }
 
 function renderAddSectionModal() {
-    return `
+  return `
     <div class="modal-overlay" id="addSectionModal" style="display:none;">
       <div class="modal" style="width:480px;">
         <div class="modal-header">

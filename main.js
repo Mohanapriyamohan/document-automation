@@ -837,7 +837,23 @@ function bindEvents() {
       canvasMissing.style.border = '1px dashed var(--warning)';
     }
 
-    // 3) Close modal
+    // 3) Update the Dept Requests badge count in sidebar (simulate creating the request)
+    const deptBadge = document.querySelector('[data-nav="dept-inbox"] .nav-badge');
+    if (deptBadge) {
+      const currentCount = parseInt(deptBadge.textContent, 10) || 0;
+      deptBadge.textContent = currentCount + 1;
+      deptBadge.style.animation = 'none';
+      void deptBadge.offsetWidth; // trigger reflow
+      deptBadge.style.animation = 'pulseGlow 600ms ease';
+    }
+
+    // 4) Reset modal form fields
+    const deptSelect = document.getElementById('requestDepartment');
+    if (deptSelect) deptSelect.selectedIndex = 0;
+    const commentField = document.getElementById('requestComment');
+    if (commentField) commentField.value = '';
+
+    // 5) Close modal
     const modal = document.getElementById('requestModal');
     if (modal) modal.style.display = 'none';
   });
